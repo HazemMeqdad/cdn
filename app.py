@@ -11,7 +11,6 @@ import hashlib
 from pathlib import Path
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
-import re
 
 app = Flask(__name__)
 CORS(app)
