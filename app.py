@@ -40,10 +40,6 @@ def login_page():
 def show_page():
     return render_template("show.html")
 
-@app.route("/video.html")
-def player():
-    return render_template("video.html")
-
 @app.route("/uploads/<user_id>/<filename>")
 def uploads(user_id, filename):
     path = app.config['UPLOAD_FOLDER'] + str(user_id) + "/" + filename
