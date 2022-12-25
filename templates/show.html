@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="image-list">
+        
+    </ul>
+
+    <script>
+        window.addEventListener("load", () => onLoad(), false);
+        async function onLoad() {
+            token = localStorage.getItem("token")
+            if (!token) {
+                alert("You don't login, please login and try again")
+                return
+            }
+            await fetch('/api/user/uploads', { 
+            method: "GET", 
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+            }).then(async rawResponse => {
+                var res = await rawResponse.json()
+                if (res.error != null) {
+                    alert(res.error)
+                } else {
+                    var ul = document.getElementById("image-list")
+                    res.uploads.forEach((item, index) => {
+                        ul.innerHTML += `<li>${index+1}- <a href='${item.uri}'>${item.filename}</a></li>\n`
+                    })
+                }
+                })
+            .catch(error => {
+                alert(error.error);
+            });
+        }
+    </script>
+</body>
+</html>
