@@ -4,19 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <title>uploads page</title>
 </head>
 <body>
-    <ul id="image-list">
-        
-    </ul>
-
+    <div class="niiiice">
+        <h2>Your uploaded files</h2>
+        <ul id="image-list">
+            
+        </ul>
+    </div>
     <script>
         window.addEventListener("load", () => onLoad(), false);
         async function onLoad() {
             token = localStorage.getItem("token")
             if (!token) {
                 alert("You don't login, please login and try again")
+                window.location.replace('/')
                 return
             }
             await fetch('/api/user/uploads', { 
@@ -41,4 +47,35 @@
         }
     </script>
 </body>
+<style>
+    body {
+        background-color: #000a12;
+    }
+    .niiiice {
+        width: 500px;
+    }
+    .niiiice h2 {
+        font-family: poppins,sans-serif;
+        color:#fff;
+        background-color: #102027;
+        font-size: 20px;
+        font-weight: 700;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px; 
+        text-align: center;
+    }
+    .niiiice ul {
+        border: 2px solid transparent;
+        border-radius: 40px;
+        position: relative;
+        background: #102027;
+    }
+    .niiiice ul li {
+        font-family: poppins,sans-serif;
+        color: #fff;
+        padding: 10px;
+        width: 80%;
+        background-color: #102027;
+    }
+</style>
 </html>
