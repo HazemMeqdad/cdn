@@ -25,4 +25,4 @@ The headers must be add
 ```
 
 # Privacy
-privacy of passwords it save wiht hash md5 no body can know your password
+privacy of passwords it save with hash md5 no body can know your password
