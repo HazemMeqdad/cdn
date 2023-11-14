@@ -1,16 +1,11 @@
 const express = require("express");
-const mongoose = require("mongoose");
+const {uploadController} = require("../controllers/upload");
+
 const authMiddleware = require("../middleware/auth");
 const allowMiddleware = require("../middleware/allow");
 
 const route = express.Router();
 
-// route.get("/files", authMiddleware, allowMiddleware, (req, res) => {
-//     res.render("files")
-// })
-
-// route.get("/files/:path", authMiddleware, allowMiddleware, (res, req) => {
-
-// })
+route.get("/upload", authMiddleware, allowMiddleware, uploadController)
 
 module.exports = route;

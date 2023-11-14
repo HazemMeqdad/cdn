@@ -1,16 +1,11 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const authMiddleware = require("../middleware/auth");
 const allowMiddleware = require("../middleware/allow");
+const {filesController, filesPathController} = require("../controllers/files");
 
 const route = express.Router();
 
-route.get("/files", authMiddleware, allowMiddleware, (req, res) => {
-    res.render("files")
-})
-
-route.get("/files/:path", authMiddleware, allowMiddleware, (res, req) => {
-
-})
+route.get("/files", authMiddleware, allowMiddleware, filesController)
+route.get("/files/:path", authMiddleware, allowMiddleware, filesPathController)
 
 module.exports = route;
