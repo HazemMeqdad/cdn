@@ -1,14 +1,26 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require('cookie-parser')
+const fs = require("fs");
 
 const authRout = require("./routes/auth");
 const indexRout = require("./routes/index");
 const uploadRoute = require("./routes/upload");
 const filesRoute = require("./routes/files");
 
-
 require("dotenv").config();  // setup configration
+
+if (!process.env.CDN_PATH) {
+    console.log("Please set `CDN_PATH` in env")
+    process.exit()
+}
+if (!fs.existsSync(process.env.CDN_PATH)) {
+    // sudo mkdir /opt/cdn
+    // sudo chown -R $USER:$USER /opt/cdn
+    console.log("Look in app.js file line 18 and 19.")
+    process.exit()
+}
+
 
 mongoose.connect(process.env.MONGOOSE_URI, {dbName: "cdn"})
 
