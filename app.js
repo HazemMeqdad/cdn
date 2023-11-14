@@ -2,6 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require('cookie-parser')
 const fs = require("fs");
+const fileUpload = require('express-fileupload');
+
 
 const authRout = require("./routes/auth");
 const indexRout = require("./routes/index");
@@ -26,12 +28,13 @@ mongoose.connect(process.env.MONGOOSE_URI, {dbName: "cdn"})
 
 const app = express();
 
+app.use(fileUpload());
 app.use(express.static("views/public"))
 app.use(cookieParser())
 app.use(authRout);
 app.use(indexRout);
 app.use(filesRout);
-app.use(uploadRout);
+app.use("/upload", uploadRout);
 
 app.set("view engine", "ejs");
 const application = {
