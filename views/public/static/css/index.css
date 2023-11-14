@@ -1,6 +1,28 @@
+* {
+    font-family: "Poppins", sans-serif;
+}
+
+body{
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #6990F2;
+}
+
+::selection {
+    color: #fff;
+    background: #6990F2;
+}
+
+.nav-c{
+    background-color: #8da9ee;
+    margin: 0 10px 0 10px;
+    border-radius: 10px;
+}
 
 .main-c {
-    background-color: rgba(128, 128, 128, 0.356);
+    background-color: white;
     padding: 10px;
     margin-top: 100px;
     border-radius: 10px;
@@ -8,7 +30,7 @@
 
 .main-b {
     border-radius: 10px;
-    background-color: rgba(128, 128, 128, 0.356);
+    background-color: white;
     margin-top: 10%;
     padding: 3%;
 }
