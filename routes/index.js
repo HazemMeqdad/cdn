@@ -34,6 +34,11 @@ route.get("/", (req, response) => {
     })
 })
 
+route.get("/logout", (req, res) => {
+    res.clearCookie("token");
+    res.redirect("/");
+})
+
 route.get("/upload", authMiddleware, (req, res) => {
     return res.render("upload");
 })
