@@ -54,6 +54,7 @@ route.get('/github/callback', (req, response) => {
                         return;
                     } else {
                         User.updateOne({username: res.data.name}, {access_token: access_token}).exec();
+                        response.cookie("token", access_token);
                         response.redirect("/");
                     }
                 })
