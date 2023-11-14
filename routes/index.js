@@ -5,10 +5,10 @@ const authMiddleware = require("../middleware/auth")
 
 const route = express.Router();
 
-const fetchUser = (req) => {
+route.get("/", (req, response) => {
     var access_token = req.cookies.token;
     if (!access_token) {
-        return 0;
+        return response.render("index", {isLogging: false});
     }
     axios({
         method: "GET",
@@ -18,29 +18,20 @@ const fetchUser = (req) => {
             accept: 'application/json',
         }
     }).then(res => {
-        console.log(res.data)
         User.findOne({ username: res.data.name })
             .exec()
             .then(result => {
-                if (!result) {
-                    return 0;
+                console.log(result ? true : false)
+                if (result) {
+                    return response.render("index", {isLogging: true, user: res.data});
                 } else {
-                    req.user = result;
-                    return result;
+                    return response.render("index", {isLogging: false});
                 }
             })
             .catch(err => {
-                return 0;
+                return response.render("index", {isLogging: false});
             })
     })
-}
-
-route.get("/", (req, res) => {
-    var user = fetchUser(req);
-    if (user) {
-        return res.render("index", {isLogging: true, user: user});
-    }
-    return res.render("index", {isLogging: false});
 })
 
 route.get("/upload", authMiddleware, (req, res) => {

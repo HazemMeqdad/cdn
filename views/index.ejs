@@ -22,13 +22,14 @@
     </div>
   </nav>
 
-  <% "dkwjdwjdkw" %>
+  <%- isLogging%>
   <% if (isLogging == true) { %>
     <!-- logging -->
     <div class="container">
       <div class="text-center"> Hey user your are greate man</div>
     </div>
     <%} else {%>
+      <%- "dkwjdwjdkw" %>
       <!-- if not login -->
       <div class="container main-c">
         <div class="jumbotron text-center text-primary">
