@@ -22,7 +22,7 @@ module.exports.githubCallbackController = (req, response) => {
         }
     }).then((res) => {
         access_token = res.data.access_token;
-        res = axios({
+        user = axios({
             method: "GET",
             url: "https://api.github.com/user",
             headers: {
@@ -30,15 +30,15 @@ module.exports.githubCallbackController = (req, response) => {
                 accept: 'application/json',
             }
         }).then(res => {
-            User.findOne({username: res.data.name})
+            User.findOne({username: user.data.name})
                 .exec()
                 .then(result => {
                     if (result.length == 0) {
                         var user = new User({
                             _id: new mongoose.Types.ObjectId(),
-                            username: res.data.name,
+                            username: user.data.name,
                             access_token: access_token,
-                            email: res.data.email,
+                            email: user.data.email,
                             allow: false
                         })
                         user.save()
@@ -50,7 +50,7 @@ module.exports.githubCallbackController = (req, response) => {
                         });
                         return;
                     } else {
-                        User.updateOne({username: res.data.name}, {access_token: access_token}).exec();
+                        User.updateOne({username: user.data.name}, {access_token: access_token}).exec();
                         response.cookie("token", access_token);
                         response.redirect("/");
                     }
