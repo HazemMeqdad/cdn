@@ -33,7 +33,7 @@ module.exports.githubCallbackController = (req, response) => {
             User.findOne({username: res.data.name})
                 .exec()
                 .then(result => {
-                    if (result.length == 0) {
+                    if (!result) {
                         var user = new User({
                             _id: new mongoose.Types.ObjectId(),
                             username: res.data.name,
