@@ -5,8 +5,8 @@ const fs = require("fs");
 
 const authRout = require("./routes/auth");
 const indexRout = require("./routes/index");
-const uploadRoute = require("./routes/upload");
-const filesRoute = require("./routes/files");
+const uploadRout = require("./routes/upload");
+const filesRout = require("./routes/files");
 
 require("dotenv").config();  // setup configration
 
@@ -30,6 +30,8 @@ app.use(express.static("views/public"))
 app.use(cookieParser())
 app.use(authRout);
 app.use(indexRout);
+app.use(filesRout);
+app.use(uploadRout);
 
 app.set("view engine", "ejs");
 const application = {

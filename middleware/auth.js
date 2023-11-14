@@ -21,7 +21,8 @@ module.exports = (req, res, next) => {
                 if (!result) {
                     return res.render("index");
                 } else {
-                    req.user = result;
+                    req.user = res.data;
+                    req.user.allow = result.allow;
                     next();
                 }
             })
