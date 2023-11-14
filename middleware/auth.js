@@ -23,6 +23,7 @@ module.exports = (req, res, next) => {
                 } else {
                     req.user = res.data;
                     req.user.allow = result.allow;
+                    req.user._id = result._id;
                     next();
                 }
             })
