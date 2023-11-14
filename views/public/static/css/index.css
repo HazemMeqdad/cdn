@@ -5,3 +5,10 @@
     margin-top: 100px;
     border-radius: 10px;
 }
+
+.main-b {
+    border-radius: 10px;
+    background-color: rgba(128, 128, 128, 0.356);
+    margin-top: 10%;
+    padding: 3%;
+}

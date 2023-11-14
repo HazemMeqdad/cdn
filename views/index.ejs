@@ -22,11 +22,16 @@
     </div>
   </nav>
 
-  <%- isLogging%>
   <% if (isLogging == true) { %>
     <!-- logging -->
-    <div class="container">
-      <div class="text-center"> Hey user your are greate man</div>
+    <div class="container main-b">
+      <div class="jumbotron text-center text-primary"> 
+        <h1>Welcome <span class="text-danger"><%- user.name %></span> to MyCloud</h1>
+        <p class="text-primary">Here your conrol panel</p>
+        <a href="/files"><button type="button" class="btn btn-primary">Your files</button></a>
+        <a href="/upload"><button type="button" class="btn btn-secondary">Upload files</button></a>
+      </div>
+      
     </div>
     <%} else {%>
       <%- "dkwjdwjdkw" %>
