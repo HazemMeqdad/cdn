@@ -18,6 +18,10 @@ body{margin-top:20px;}
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
+    background-color: white;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .file-item {
     position: relative;
@@ -25,6 +29,8 @@ body{margin-top:20px;}
     -ms-flex: 0 0 auto;
     flex: 0 0 auto;
     border: 1px solid #eee;
+    border-radius: 10px;
+    background-color: #adccf9;
     cursor: pointer;
 }
 .file-item:hover,
@@ -267,4 +273,11 @@ body{margin-top:20px;}
     .dark-style .file-manager-col-view .file-item.selected .file-item-actions {
         opacity: 1;
     }
+}
+
+.toast-c {
+    position: fixed;
+    left: 60%;
+    top: 12%;
+    background-color: #4BB543;
 }

@@ -41,3 +41,22 @@ module.exports.publicFileController = (req, res) => {
         
     })
 }
+
+module.exports.publicController = (req, res) => {
+    const file = req.params.file;
+    File.findOne({name: file})
+        .exec()
+        .then(result => {
+            if (!result) {
+                return res.status(404).json({message: "Error"})
+            } else {
+                File.updateOne({name: file}, {private: !result.private});
+                return res.status(200).json({message: "Update successfully"})
+            }
+
+        })
+        .catch(err => {
+            return res.status(404).json({message: "Error"})
+        })
+}
+
