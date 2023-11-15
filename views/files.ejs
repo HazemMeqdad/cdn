@@ -63,14 +63,14 @@
             
             <div class="container flex-grow-1 light-style container-p-y">
             <% files.forEach(file => { %>
-                <div class="file-item" style="z-index: 0;">
+                <div class="file-item">
                     <div class="file-item-select-bg bg-primary"></div>
                     <div class="file-item-icon far fa-file"></div>
                     <a href="<%- "/f/" + file.name %>" class="file-item-name">
                         <%- file.name %>
                     </a>
                     <div class="file-item-changed">02/13/2018</div>
-                    <div class="dropdown file-item-actions btn-group" style="overflow: visible">
+                    <div class="dropdown file-item-actions btn-group">
                         <button class="btn btn-default btn-sm rounded-pill icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="ion ion-ios-more"></i>
                         </button>
