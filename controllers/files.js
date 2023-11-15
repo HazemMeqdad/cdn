@@ -60,3 +60,23 @@ module.exports.publicController = (req, res) => {
         })
 }
 
+
+module.exports.filesDeleteController = (req, res) => {
+    const file = req.params.file;
+    const path = process.env.CDN_PATH + "/" +req.user._id + "/" + req.params.file;
+    File.findOne({name: file})
+        .exec()
+        .then(result => {
+            if (!result) {
+                return res.status(404).json({message: "Error"})
+            } else {
+                File.deleteOne({name: file}).exec();
+                fs.unlinkSync(path);
+                return res.status(200).json({message: "Delete successfully"})
+            }
+
+        })
+        .catch(err => {
+            return res.status(404).json({message: "Error"})
+        })
+}

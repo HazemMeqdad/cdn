@@ -16,6 +16,7 @@ const copyLink = (filename) => {
         .writeText(copyText)
         .then(function () {
             showToast("Copy successfully")
+            location.reload()
         })
         .catch(function (error) {
             alert("Failed to copy text: " + error);
@@ -23,7 +24,17 @@ const copyLink = (filename) => {
 };
 
 const deleteFile = (filename) => {
-
+    axios({
+        url: `/files/${filename}`,
+        method: "DELETE"
+    })
+        .then(res => {
+            showToast(res.data.message)
+            location.reload()
+        })
+        .catch(err => {
+            console.log(err);
+        })
 }
 
 const makePublic = (filename) => {
@@ -33,6 +44,7 @@ const makePublic = (filename) => {
     })
         .then(res => {
             showToast(res.data.message)
+            location.reload()
         })
         .catch(err => {
             console.log(err);

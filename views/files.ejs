@@ -74,7 +74,7 @@
                             <i class="ion ion-ios-more"></i>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                          <li><a class="dropdown-item" href="javascript:void(0)" onclick="makePublic('<%- file.name %>')">Make public</a></li>
+                          <li><a class="dropdown-item" href="javascript:void(0)" onclick="makePublic('<%- file.name %>')"><%if (file.private){ %>Make public <%} else { %>Make private <% } %></a></li>
                           <li><a class="dropdown-item" href="javascript:void(0)" onclick="deleteFile('<%- file.name %>')">Delete</a></li>
                           <li><a class="dropdown-item" href="javascript:void(0)" onclick="copyLink('<%- file.name %>')" id="copyButton">Copy link</a></li>
                         </ul>
