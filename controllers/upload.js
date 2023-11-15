@@ -17,7 +17,17 @@ module.exports.uploadPostMiddleware = (req, res) => {
         return res.status(400).send({"error": "no file uploaded"})
     }
     extension = file.name.match(/[0-9a-z]+$/i)[0];
-    console.log(req.user);
+    const now = new Date();
+    const milliseconds = now.getTime();
+
+    const date = new Date(milliseconds);
+
+    const year = date.getFullYear();
+    const month = ("0" + (date.getMonth() + 1)).slice(-2);
+    const day = ("0" + date.getDate()).slice(-2);
+
+    // YYYY-MM-DD
+    const formatted = `${day}/${month}/${year}`;
     fileObj = new File({
         _id: new mongoose.Types.ObjectId(),
         path: `/${file.name}`,
@@ -25,7 +35,8 @@ module.exports.uploadPostMiddleware = (req, res) => {
         name: file.name,
         owner: req.user._id,
         ownerName: req.user.name,
-        private: true
+        private: true,
+        uploadAt: formatted
     })
     fileObj.save();
     if (!fs.existsSync(`/opt/cdn/${req.user._id}`)) {

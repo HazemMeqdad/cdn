@@ -7,7 +7,8 @@ const File = mongoose.Schema({
     extension: {type: String, required: true},
     owner: {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true},
     ownerName: {type: String, required: true},
-    private: {type: Boolean, required: true}
+    private: {type: Boolean, required: true},
+    uploadAt: {type: String, required: true}
 });
 
 
