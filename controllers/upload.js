@@ -16,20 +16,22 @@ module.exports.uploadPostMiddleware = (req, res) => {
     if (!file) {
         return res.status(400).send({"error": "no file uploaded"})
     }
-    extension = file.name.match(/\.[0-9a-z]+$/i)[0];
+    extension = file.name.match(/[0-9a-z]+$/i)[0];
     console.log(req.user);
     fileObj = new File({
         _id: new mongoose.Types.ObjectId(),
-        path: `/${req.user._id}/${file.md5}${extension}`,
+        path: `/${file.name}`,
+        extension: extension,
         name: file.name,
         owner: req.user._id,
+        ownerName: req.user.name,
         private: true
     })
     fileObj.save();
     if (!fs.existsSync(`/opt/cdn/${req.user._id}`)) {
         fs.mkdirSync(`/opt/cdn/${req.user._id}`);
     }
-    file.mv(`/opt/cdn/${req.user._id}/${file.md5}${extension}`, function (err) {
+    file.mv(`/opt/cdn/${req.user._id}/${file.name}`, function (err) {
         if (err)
             return res.status(500).send(err);
         return res.send('File uploaded!');
