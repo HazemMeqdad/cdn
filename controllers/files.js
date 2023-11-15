@@ -50,7 +50,7 @@ module.exports.publicController = (req, res) => {
             if (!result) {
                 return res.status(404).json({message: "Error"})
             } else {
-                File.updateOne({name: file}, {private: !result.private});
+                File.updateOne({name: file}, {private: !result.private}).exec();
                 return res.status(200).json({message: "Update successfully"})
             }
 
