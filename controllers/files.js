@@ -21,11 +21,25 @@ module.exports.filesController = (req, res) => {
 
 
 module.exports.filesViewController = (req, res) => {
-    File.find({})
+    // const path = process.env.CDN_PATH + "/" +req.user._id + "/" + req.params.file;
+    File.findOne({name: req.params.file})
+        .exec()
+        .then(result => {
+            if (!result) {
+            console.log(result);
+
+                return res.render("404");
+            } else {
+                return res.render("file", {file: result});
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            return res.render("404");
+        })
 }
 
 module.exports.publicFileController = (req, res) => {
-    console.log(req.file)
     const path = process.env.CDN_PATH + "/" +req.file.owner._id + "/" + req.params.file;
     console.log(path)
     fs.readFile(path, {encoding: "utf-8"}, (err, file) => {
@@ -79,4 +93,18 @@ module.exports.filesDeleteController = (req, res) => {
         .catch(err => {
             return res.status(404).json({message: "Error"})
         })
+}
+
+
+module.exports.downloadFileController = (req, res) => {
+    const path = process.env.CDN_PATH + "/" +req.user._id + "/" + req.params.file;
+    fs.readFile(path, {encoding: "utf-8"}, (err, file) => {
+        console.log(1);
+        if (err) {
+            return res.render("404");
+        }
+        console.log(path);
+        res.sendFile(path);    
+        // res.end();    
+    })
 }
