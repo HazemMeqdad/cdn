@@ -50,7 +50,7 @@ module.exports.publicFileController = (req, res) => {
             return res.download(path);
         } else {
             console.log(req.file);
-            res.send("Yoook")
+            return res.sendFile(path);
         }
         
     })
