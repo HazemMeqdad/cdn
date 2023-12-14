@@ -9,12 +9,10 @@ module.exports.filesController = (req, res) => {
         .exec()
         .then(files => {
             fs.readdirSync(process.env.CDN_PATH+"/"+user_id).forEach(file => {
-                console.log(file);
               });
             return res.render("files", {files: files, user: req.user})
         })
         .catch(err => {
-            console.log(err);
             res.render("404")
         })
 }
@@ -26,15 +24,12 @@ module.exports.filesViewController = (req, res) => {
         .exec()
         .then(result => {
             if (!result) {
-            console.log(result);
-
                 return res.render("404");
             } else {
                 return res.render("file", {file: result});
             }
         })
         .catch(err => {
-            console.log(err);
             return res.render("404");
         })
 }
@@ -48,7 +43,6 @@ module.exports.publicFileController = (req, res) => {
         if (req.query.download == 'true') {
             return res.download(path);
         } else {
-            console.log(req.file);
             return res.sendFile(path);
         }
         
@@ -101,8 +95,7 @@ module.exports.downloadFileController = (req, res) => {
         if (err) {
             return res.render("404");
         }
-        console.log(path);
-        res.sendFile(path);    
+        res.sendFile(path);
         // res.end();    
     })
 }
