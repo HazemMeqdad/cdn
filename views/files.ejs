@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>MyCloud services</title>
+    <%- include("./partials/head") %>
+    <link rel="stylesheet" href="static/css/files.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons.min.css"
+        integrity="sha512-0/rEDduZGrqo4riUlwqyuHDQzp2D1ZCgH/gFIfjMIL5az8so6ZiXyhf1Rg8i6xsjv+z/Ubc4tt1thLigEcu6Ug=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <%- include("./partials/nav") %>
+
+    <!-- Toast copy -->
+    <div class="toast align-items-center text-white border-0 hide toast-c" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body" id="toast-body">
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+
+
+    <div class="container flex-grow-1 light-style container-p-y">
+        <div class="container-m-nx container-m-ny bg-lightest mb-3">
+            <ol class="breadcrumb text-big container-p-x py-3 m-0">
+                <li class="breadcrumb-item">
+                    <a href="javascript:void(0)">/</a>
+                </li>
+            </ol>
+
+            <hr class="m-0" />
+
+            <div class="file-manager-actions container-p-x py-2">
+                <div>
+                    <a href="/upload">
+                    <button type="button" class="btn btn-primary mr-2"><i class="ion ion-md-cloud-upload"></i>&nbsp;
+                        Upload</button></a>
+                </div>
+            </div>
+
+            <hr class="m-0" />
+        </div>
+
+        <div class="file-manager-container container file-manager-row-view">
+            
+            <div class="container flex-grow-1 light-style container-p-y">
+            <% files.forEach(file => { %>
+                <div class="file-item">
+                    <div class="file-item-select-bg bg-primary"></div>
+                    <div class="file-item-icon far fa-file"></div>
+                    <a href="<%- "/files/" + file.name %>" class="file-item-name">
+                        <%- file.name %>
+                    </a>
+                    <div class="file-item-changed"><%- file.uploadAt %></div>
+                    <div class="dropdown file-item-actions btn-group">
+                        <button class="btn btn-default btn-sm rounded-pill icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="ion ion-ios-more"></i>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                          <li><a class="dropdown-item" href="javascript:void(0)" onclick="makePublic('<%- file.name %>')"><%if (file.private){ %>Make public <%} else { %>Make private <% } %></a></li>
+                          <li><a class="dropdown-item" href="javascript:void(0)" onclick="deleteFile('<%- file.name %>')">Delete</a></li>
+                          <li><a class="dropdown-item" href="javascript:void(0)" onclick="copyLink('<%- file.name %>')" id="copyButton">Copy link</a></li>
+                        </ul>
+                      </div>
+                </div>
+                <% }); %>
+            </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/static/js/files.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>MyCloud</title>
+    <%- include("./partials/head") %>
+    <link rel="stylesheet" href="static/css/upload.css">
+
+</head>
+
+<body>
+  <%- include("./partials/nav") %>
+    <div class="container">
+        <div>
+            <div class="wrapper">
+            <header>File Uploader</header>
+            <form action="#">
+            <input class="file-input" type="file" name="file" hidden>
+            <i class="fas fa-cloud-upload-alt"></i>
+            <p>Browse File to Upload</p>
+            </form>
+            <section class="progress-area"></section>
+            <section class="uploaded-area"></section>
+        </div>
+    </div>
+    </div>
+    
+      <script src="static/js/upload.js"></script>
+    </body>
+
+</html>
