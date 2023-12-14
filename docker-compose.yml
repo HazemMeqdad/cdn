@@ -1,0 +1,32 @@
+
+version: '3'
+
+
+services:
+  cdn:
+    build: .
+    environment:
+      - MONGOOSE_URI=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@database:27017
+      - GITHUB_CLIENT_ID=${GITHUB_CLIENT_ID}
+      - GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET}
+      - CDN_PATH=${CDN_PATH}
+    volumes:
+      - /opt/cdn:/opt/cdn
+    ports:
+      - 5000:5000
+    restart: always
+    container_name: cdn
+    depends_on:
+      - database
+  database:
+    image: mongo
+    volumes:
+      - $HOME/data/mongodb:/data/db
+    ports:
+      - 27019:27017
+    restart: unless-stopped
+    hostname: database
+    container_name: cdn_database
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
