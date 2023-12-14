@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const cookieParser = require('cookie-parser')
 const fs = require("fs");
 const fileUpload = require('express-fileupload');
-
+var morgan = require('morgan')
 
 const authRout = require("./routes/auth");
 const indexRout = require("./routes/index");
@@ -28,6 +28,7 @@ mongoose.connect(process.env.MONGOOSE_URI, {dbName: "cdn"})
 
 const app = express();
 
+app.use(morgan("tiny"));
 app.use(fileUpload());
 app.use(express.static("views/public"))
 app.use(cookieParser())

@@ -13,7 +13,7 @@ services:
     volumes:
       - /opt/cdn:/opt/cdn
     ports:
-      - 5000:5000
+      - "172.17.0.1:6000:5000"
     restart: always
     container_name: cdn
     depends_on:
@@ -23,7 +23,7 @@ services:
     volumes:
       - $HOME/data/mongodb:/data/db
     ports:
-      - 27019:27017
+      - "27019:27017"
     restart: unless-stopped
     hostname: database
     container_name: cdn_database
