@@ -41,7 +41,6 @@ module.exports.filesViewController = (req, res) => {
 
 module.exports.publicFileController = (req, res) => {
     const path = process.env.CDN_PATH + "/" +req.file.owner._id + "/" + req.params.file;
-    console.log(path)
     fs.readFile(path, {encoding: "utf-8"}, (err, file) => {
         if (err) {
             return res.render("404");
@@ -99,7 +98,6 @@ module.exports.filesDeleteController = (req, res) => {
 module.exports.downloadFileController = (req, res) => {
     const path = process.env.CDN_PATH + "/" +req.user._id + "/" + req.params.file;
     fs.readFile(path, {encoding: "utf-8"}, (err, file) => {
-        console.log(1);
         if (err) {
             return res.render("404");
         }

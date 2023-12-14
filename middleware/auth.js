@@ -5,7 +5,7 @@ const axios = require("axios");
 module.exports = (req, res, next) => {
     var access_token = req.cookies.token;
     if (!access_token) {
-        return res.render("index");
+        return res.render("index", {isLogging: false});
     }
     axios({
         method: "GET",
@@ -19,7 +19,7 @@ module.exports = (req, res, next) => {
             .exec()
             .then(result => {
                 if (!result) {
-                    return res.render("index");
+                    return res.render("index", {isLogging: false});
                 } else {
                     req.user = res.data;
                     req.user.allow = result.allow;
@@ -28,7 +28,7 @@ module.exports = (req, res, next) => {
                 }
             })
             .catch(err => {
-                return res.render("index");
+                return res.render("index", {isLogging: false});
             })
     })
 }
