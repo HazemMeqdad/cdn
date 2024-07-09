@@ -22,7 +22,7 @@ if (!fs.existsSync(process.env.CDN_PATH)) {
     console.log("Look in app.js file line 18 and 19.")
     process.exit()
 }
-
+ 
 
 mongoose.connect(process.env.MONGOOSE_URI, {dbName: "cdn"})
 
